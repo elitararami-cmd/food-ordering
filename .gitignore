@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local DB (lives on Railway volume in production)
+/data/
+
+# original source photos (already copied to public/food/)
+/Food Photos/
