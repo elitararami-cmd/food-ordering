@@ -20,6 +20,14 @@ export default function AccessibilityPage() {
         </section>
 
         <section className="space-y-3">
+          <h2 className="text-xl font-bold" style={{ color: 'var(--color-text)' }}>נגישות פיזית</h2>
+          <p style={{ color: 'var(--color-text-muted)' }}>
+            העסק פועל במתכונת של משלוחים בלבד ואינו מקבל קהל פיזית. אין צורך בהגעה למקום.
+            ההזמנה מבוצעת דרך האתר וניתנת לביצוע מכל מקום ומכל מכשיר.
+          </p>
+        </section>
+
+        <section className="space-y-3">
           <h2 className="text-xl font-bold" style={{ color: 'var(--color-text)' }}>מה מונגש באתר</h2>
           <ul className="space-y-2 list-disc list-inside" style={{ color: 'var(--color-text-muted)' }}>
             <li>האתר מוגדר בשפה העברית (<code>lang=&quot;he&quot;</code>) ובכיוון RTL</li>
@@ -38,19 +46,39 @@ export default function AccessibilityPage() {
             <li>חלק מרכיבי הממשק עשויים להיות לא אופטימליים לקוראי מסך מסוימים — אנו עובדים על שיפור זה</li>
             <li>ניגודיות הצבעים בטקסט רגיל עשויה שלא לעמוד ברמת AAA</li>
           </ul>
+          <div
+            className="rounded-xl p-4"
+            style={{ background: 'var(--color-warm)', border: '1px solid var(--color-border)' }}
+          >
+            <p style={{ color: 'var(--color-text-muted)' }}>
+              במידה ונתקלתם בקושי בשימוש באתר או בביצוע הזמנה עקב מגבלת נגישות, נשמח להעניק לכם שירות אישי
+              ולבצע את ההזמנה <strong>טלפונית</strong> — צרו קשר ישירות עם רכז הנגישות שלנו.
+            </p>
+          </div>
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-xl font-bold" style={{ color: 'var(--color-text)' }}>פנייה בנושא נגישות</h2>
+          <h2 className="text-xl font-bold" style={{ color: 'var(--color-text)' }}>פנייה לרכז הנגישות</h2>
           <p style={{ color: 'var(--color-text-muted)' }}>
-            נתקלתם בבעיית נגישות? נשמח לשמוע ולתקן. ניתן לפנות אלינו:
+            נתקלתם בבעיית נגישות? נשמח לשמוע ולתקן בהקדם האפשרי.
           </p>
           <div
             className="rounded-xl p-4 space-y-2"
             style={{ background: 'var(--color-warm)', border: '1px solid var(--color-border)' }}
           >
-            <p className="font-bold" style={{ color: 'var(--color-text)' }}>רכז/ת נגישות: אליתר</p>
-            <p style={{ color: 'var(--color-text-muted)' }}>טלפון: <a href="tel:" style={{ color: 'var(--color-primary)' }}>השאירו פרטים ונחזור אליכם</a></p>
+            <p className="font-bold" style={{ color: 'var(--color-text)' }}>רכז נגישות: ישראל ישראלי</p>
+            <p style={{ color: 'var(--color-text-muted)' }}>
+              טלפון / WhatsApp:{' '}
+              <a href="tel:PHONE_PLACEHOLDER" style={{ color: 'var(--color-primary)', fontWeight: 'bold' }}>
+                יש להוסיף מספר טלפון
+              </a>
+            </p>
+            <p style={{ color: 'var(--color-text-muted)' }}>
+              אימייל:{' '}
+              <a href="mailto:EMAIL_PLACEHOLDER" style={{ color: 'var(--color-primary)', fontWeight: 'bold' }}>
+                יש להוסיף כתובת אימייל
+              </a>
+            </p>
             <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>זמן תגובה מרבי: 5 ימי עסקים</p>
           </div>
         </section>
