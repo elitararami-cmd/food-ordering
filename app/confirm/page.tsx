@@ -33,18 +33,16 @@ function ConfirmContent() {
           ההזמנה התקבלה!
         </h1>
 
-        <div
-          className="rounded-xl px-4 py-3 space-y-1"
-          style={{ background: 'var(--color-warm)', border: '1px solid var(--color-border)' }}
-        >
-          <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>מספר הזמנה</p>
-          <p className="text-2xl font-black" style={{ color: 'var(--color-primary)' }}>#{id}</p>
-          {formattedDate && (
+        {formattedDate && (
+          <div
+            className="rounded-xl px-4 py-3"
+            style={{ background: 'var(--color-warm)', border: '1px solid var(--color-border)' }}
+          >
             <p className="text-sm font-medium" style={{ color: 'var(--color-text)' }}>
               📅 {formattedDate}
             </p>
-          )}
-        </div>
+          </div>
+        )}
 
         <p className="text-sm leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
           תודה! ניצור איתך קשר בקרוב לאישור הסופי של ההזמנה.
