@@ -83,6 +83,15 @@ export default function HomePage() {
         {/* Content */}
         <div className="relative z-10 flex flex-col items-center text-center px-4 w-full max-w-lg">
 
+          {/* First order discount badge */}
+          <div
+            className="mb-5 px-5 py-2.5 rounded-full font-bold text-sm flex items-center gap-2"
+            style={{ background: 'rgba(200,134,10,0.92)', color: '#fff', backdropFilter: 'blur(8px)', boxShadow: '0 2px 12px rgba(0,0,0,0.3)' }}
+          >
+            <span>🎉</span>
+            <span>15% הנחה להזמנה ראשונה!</span>
+          </div>
+
           {/* Logo / Brand */}
           <div className="mb-2">
             <span
