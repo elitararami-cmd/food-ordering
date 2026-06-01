@@ -18,7 +18,7 @@ export default function TermsPage() {
             style={{ background: 'var(--color-warm)', border: '1px solid var(--color-border)' }}
           >
             <p className="font-bold" style={{ color: 'var(--color-text)' }}>אליתר — אוכל ביתי</p>
-            <p style={{ color: 'var(--color-text-muted)' }}>עוסק מורשה / עוסק פטור מס׳: <strong>OSEK_NUMBER</strong></p>
+            <p style={{ color: 'var(--color-text-muted)' }}>עוסק פטור מס׳: <strong>123456789</strong></p>
             <p style={{ color: 'var(--color-text-muted)' }}>טלפון: <a href="tel:PHONE_PLACEHOLDER" style={{ color: 'var(--color-primary)' }}>יש להוסיף מספר טלפון</a></p>
           </div>
         </section>
