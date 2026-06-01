@@ -12,6 +12,18 @@ export default function TermsPage() {
         </div>
 
         <section className="space-y-3">
+          <h2 className="text-xl font-bold" style={{ color: 'var(--color-text)' }}>פרטי העסק</h2>
+          <div
+            className="rounded-xl p-4 space-y-1"
+            style={{ background: 'var(--color-warm)', border: '1px solid var(--color-border)' }}
+          >
+            <p className="font-bold" style={{ color: 'var(--color-text)' }}>אליתר — אוכל ביתי</p>
+            <p style={{ color: 'var(--color-text-muted)' }}>עוסק מורשה / עוסק פטור מס׳: <strong>OSEK_NUMBER</strong></p>
+            <p style={{ color: 'var(--color-text-muted)' }}>טלפון: <a href="tel:PHONE_PLACEHOLDER" style={{ color: 'var(--color-primary)' }}>יש להוסיף מספר טלפון</a></p>
+          </div>
+        </section>
+
+        <section className="space-y-3">
           <h2 className="text-xl font-bold" style={{ color: 'var(--color-text)' }}>כללי</h2>
           <p style={{ color: 'var(--color-text-muted)' }}>
             ברוכים הבאים לאליתר. השימוש באתר ובשירות ההזמנות מהווה הסכמה לתנאים המפורטים להלן.

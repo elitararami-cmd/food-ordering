@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -13,6 +14,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="he" dir="rtl">
+      <head>
+        {/* UserWay accessibility widget — replace USERWAY_ACCOUNT_ID after registering at userway.org */}
+        <Script
+          src="https://cdn.userway.org/widget.js"
+          data-account="USERWAY_ACCOUNT_ID"
+          strategy="lazyOnload"
+        />
+      </head>
       <body>
         <a
           href="#main-content"

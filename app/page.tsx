@@ -277,7 +277,7 @@ export default function HomePage() {
         className="py-6 text-center text-sm space-y-2"
         style={{ background: 'var(--color-text)', color: 'rgba(255,255,255,0.45)' }}
       >
-        <p>אליתר © {new Date().getFullYear()} · אוכל ביתי</p>
+        <p>אליתר — אוכל ביתי · ע.מ. OSEK_NUMBER · © {new Date().getFullYear()}</p>
         <p className="flex items-center justify-center gap-4 flex-wrap">
           <a href="/accessibility" className="hover:text-white transition-colors underline">הצהרת נגישות</a>
           <span>·</span>
