@@ -454,6 +454,11 @@ function OrderRow({ order, onRefresh }: { order: Order; onRefresh: () => void })
             <span className="font-bold text-gray-800">#{order.id}</span>
             <span className="font-medium">{order.customer_name}</span>
             <span className="text-gray-500 text-sm">{order.customer_phone}</span>
+            {order.phone_order_count != null && (
+              <span className={`text-xs px-2 py-0.5 rounded-full font-bold ${order.phone_order_count === 1 ? 'bg-green-100 text-green-700' : 'bg-purple-100 text-purple-700'}`}>
+                {order.phone_order_count === 1 ? '⭐ הזמנה ראשונה' : `הזמנה #${order.phone_order_count} של לקוח זה`}
+              </span>
+            )}
           </div>
           <div className="text-sm text-gray-500 mt-0.5">
             משלוח: {formattedDate} · {order.total.toFixed(2)} ₪

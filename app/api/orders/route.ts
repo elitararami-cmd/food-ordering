@@ -17,7 +17,9 @@ export async function GET(req: NextRequest) {
 
   const db = getDb();
   const orders = db.prepare(`
-    SELECT o.*, GROUP_CONCAT(oi.product_name || ' x' || oi.quantity || ' ' || oi.unit) as items_summary
+    SELECT o.*,
+      GROUP_CONCAT(oi.product_name || ' x' || oi.quantity || ' ' || oi.unit) as items_summary,
+      (SELECT COUNT(*) FROM orders o2 WHERE o2.customer_phone = o.customer_phone) as phone_order_count
     FROM orders o
     LEFT JOIN order_items oi ON oi.order_id = o.id
     GROUP BY o.id
@@ -34,9 +36,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'שדות חסרים' }, { status: 400 });
   }
 
-  const total = (items as CartItem[]).reduce((sum, item) => sum + item.price * item.quantity, 0);
-
   const db = getDb();
+
+  const prevOrders = db.prepare('SELECT COUNT(*) as count FROM orders WHERE customer_phone = ?').get(customer_phone) as { count: number };
+  const isFirstOrder = prevOrders.count === 0;
+
+  const rawTotal = (items as CartItem[]).reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const total = isFirstOrder ? rawTotal * 0.85 : rawTotal;
+
   const order = db.prepare(
     'INSERT INTO orders (customer_name, customer_phone, delivery_date, notes, total) VALUES (?, ?, ?, ?, ?)'
   ).run(customer_name, customer_phone, delivery_date, notes || '', total);
@@ -49,5 +56,5 @@ export async function POST(req: NextRequest) {
     insertItem.run(order.lastInsertRowid, item.product_id, item.product_name, item.unit, item.quantity, item.price);
   }
 
-  return NextResponse.json({ id: order.lastInsertRowid });
+  return NextResponse.json({ id: order.lastInsertRowid, isFirstOrder, total });
 }

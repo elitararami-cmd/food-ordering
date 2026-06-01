@@ -28,6 +28,7 @@ export interface Order {
   created_at: string;
   items?: OrderItem[];
   items_summary?: string;
+  phone_order_count?: number;
 }
 
 export interface OrderItem {

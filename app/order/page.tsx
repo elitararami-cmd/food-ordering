@@ -29,6 +29,7 @@ function OrderContent() {
   const [showCheckout, setShowCheckout] = useState(false);
   const [form, setForm] = useState({ name: '', phone: '', notes: '' });
   const [submitting, setSubmitting] = useState(false);
+  const [isFirstOrder, setIsFirstOrder] = useState<boolean | null>(null);
 
   useEffect(() => {
     if (!date) { router.push('/'); return; }
@@ -68,8 +69,16 @@ function OrderContent() {
     setCart(prev => prev.filter(i => i.product_id !== productId));
   }, []);
 
-  const cartTotal = cart.reduce((sum, i) => sum + i.price * i.quantity, 0);
+  const rawTotal = cart.reduce((sum, i) => sum + i.price * i.quantity, 0);
+  const cartTotal = isFirstOrder ? rawTotal * 0.85 : rawTotal;
   const cartCount = cart.length;
+
+  async function checkFirstOrder(phone: string) {
+    if (phone.length < 9) { setIsFirstOrder(null); return; }
+    const res = await fetch(`/api/orders/check-phone?phone=${encodeURIComponent(phone)}`);
+    const data = await res.json();
+    setIsFirstOrder(data.isFirst);
+  }
 
   async function handleOrder() {
     if (!form.name || !form.phone) return;
@@ -257,29 +266,44 @@ function OrderContent() {
             <h2 className="text-2xl font-black" style={{ color: 'var(--color-text)' }}>פרטי ההזמנה</h2>
             <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>תאריך: {formatDate(date)}</p>
 
-            {[
-              { label: 'שם מלא *', key: 'name', type: 'text', placeholder: 'ישראל ישראלי' },
-              { label: 'טלפון *', key: 'phone', type: 'tel', placeholder: '050-0000000' },
-            ].map(field => (
-              <div key={field.key}>
-                <label className="block text-sm font-bold mb-1.5" style={{ color: 'var(--color-text)' }}>{field.label}</label>
-                <input
-                  type={field.type}
-                  value={form[field.key as keyof typeof form]}
-                  onChange={e => setForm(f => ({ ...f, [field.key]: e.target.value }))}
-                  placeholder={field.placeholder}
-                  dir={field.key === 'phone' ? 'ltr' : 'rtl'}
-                  className="w-full rounded-xl px-4 py-3 font-medium outline-none transition-all"
-                  style={{
-                    background: 'var(--color-warm)',
-                    border: '2px solid var(--color-border)',
-                    color: 'var(--color-text)',
-                  }}
-                  onFocus={e => (e.currentTarget.style.borderColor = 'var(--color-primary)')}
-                  onBlur={e => (e.currentTarget.style.borderColor = 'var(--color-border)')}
-                />
-              </div>
-            ))}
+            <div>
+              <label className="block text-sm font-bold mb-1.5" style={{ color: 'var(--color-text)' }}>שם מלא *</label>
+              <input
+                type="text"
+                value={form.name}
+                onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+                placeholder="ישראל ישראלי"
+                className="w-full rounded-xl px-4 py-3 font-medium outline-none transition-all"
+                style={{ background: 'var(--color-warm)', border: '2px solid var(--color-border)', color: 'var(--color-text)' }}
+                onFocus={e => (e.currentTarget.style.borderColor = 'var(--color-primary)')}
+                onBlur={e => (e.currentTarget.style.borderColor = 'var(--color-border)')}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-bold mb-1.5" style={{ color: 'var(--color-text)' }}>טלפון *</label>
+              <input
+                type="tel"
+                value={form.phone}
+                dir="ltr"
+                onChange={e => {
+                  const phone = e.target.value;
+                  setForm(f => ({ ...f, phone }));
+                  checkFirstOrder(phone);
+                }}
+                placeholder="050-0000000"
+                className="w-full rounded-xl px-4 py-3 font-medium outline-none transition-all"
+                style={{ background: 'var(--color-warm)', border: '2px solid var(--color-border)', color: 'var(--color-text)' }}
+                onFocus={e => (e.currentTarget.style.borderColor = 'var(--color-primary)')}
+                onBlur={e => (e.currentTarget.style.borderColor = 'var(--color-border)')}
+              />
+              {isFirstOrder === true && (
+                <div className="mt-2 flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-bold" style={{ background: '#d1fae5', color: '#065f46' }}>
+                  <span>🎉</span>
+                  <span>15% הנחה להזמנה ראשונה!</span>
+                </div>
+              )}
+            </div>
 
             <div>
               <label className="block text-sm font-bold mb-1.5" style={{ color: 'var(--color-text)' }}>הערות (אופציונלי)</label>
@@ -294,11 +318,25 @@ function OrderContent() {
             </div>
 
             <div
-              className="flex justify-between items-center py-3 rounded-xl px-4"
+              className="rounded-xl px-4 py-3 space-y-1"
               style={{ background: 'var(--color-warm)', border: '1px solid var(--color-border)' }}
             >
-              <span className="font-bold" style={{ color: 'var(--color-text)' }}>סה&quot;כ לתשלום:</span>
-              <span className="text-xl font-black" style={{ color: 'var(--color-primary)' }}>{formatPrice(cartTotal)}</span>
+              {isFirstOrder && (
+                <div className="flex justify-between text-sm" style={{ color: 'var(--color-text-muted)' }}>
+                  <span>לפני הנחה:</span>
+                  <span className="line-through">{formatPrice(rawTotal)}</span>
+                </div>
+              )}
+              {isFirstOrder && (
+                <div className="flex justify-between text-sm font-bold" style={{ color: '#065f46' }}>
+                  <span>הנחה 15%:</span>
+                  <span>-{formatPrice(rawTotal * 0.15)}</span>
+                </div>
+              )}
+              <div className="flex justify-between items-center">
+                <span className="font-bold" style={{ color: 'var(--color-text)' }}>סה&quot;כ לתשלום:</span>
+                <span className="text-xl font-black" style={{ color: 'var(--color-primary)' }}>{formatPrice(cartTotal)}</span>
+              </div>
             </div>
 
             <div className="flex gap-2 pt-1">
