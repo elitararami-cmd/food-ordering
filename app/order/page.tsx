@@ -197,7 +197,7 @@ function OrderContent() {
           <div className="relative flex flex-col w-full max-w-sm h-full shadow-2xl" style={{ background: 'var(--color-bg)' }}>
 
             <div className="flex items-center justify-between px-5 py-4" style={{ background: 'var(--color-primary)' }}>
-              <button onClick={() => setShowCart(false)} className="text-white/70 hover:text-white text-2xl leading-none">×</button>
+              <button onClick={() => setShowCart(false)} aria-label="סגור עגלה" className="text-white/70 hover:text-white text-2xl leading-none">×</button>
               <h2 className="font-black text-xl text-white">עגלת הקניות</h2>
             </div>
 
@@ -227,6 +227,7 @@ function OrderContent() {
                         </span>
                         <button
                           onClick={() => removeFromCart(item.product_id)}
+                          aria-label={`הסר ${item.product_name} מהעגלה`}
                           className="text-lg opacity-40 hover:opacity-100 transition-opacity"
                         >🗑</button>
                       </div>
@@ -397,6 +398,7 @@ function ProductCard({ product, cartItem, onAdd, onRemove }: {
           />
           <button
             onClick={() => setLightbox(false)}
+            aria-label="סגור תמונה"
             className="absolute top-3 left-3 bg-black/60 hover:bg-black text-white rounded-full w-9 h-9 flex items-center justify-center text-xl font-bold"
           >×</button>
         </div>
@@ -485,12 +487,14 @@ function ProductCard({ product, cartItem, onAdd, onRemove }: {
             >
               <button
                 onClick={() => setQty(q => Math.max(1, q - 1))}
+                aria-label="הפחת כמות"
                 className="text-lg font-black w-6 text-center leading-none"
                 style={{ color: 'var(--color-primary)' }}
               >−</button>
-              <span className="w-5 text-center font-black" style={{ color: 'var(--color-text)' }}>{qty}</span>
+              <span className="w-5 text-center font-black" aria-live="polite" style={{ color: 'var(--color-text)' }}>{qty}</span>
               <button
                 onClick={() => setQty(q => q + 1)}
+                aria-label="הוסף כמות"
                 className="text-lg font-black w-6 text-center leading-none"
                 style={{ color: 'var(--color-primary)' }}
               >+</button>
@@ -510,6 +514,7 @@ function ProductCard({ product, cartItem, onAdd, onRemove }: {
           {inCart && (
             <button
               onClick={() => onRemove(product.id)}
+              aria-label={`הסר ${product.name} מהעגלה`}
               className="px-3 py-2.5 rounded-xl text-base transition-all hover:opacity-70"
               style={{ background: 'var(--color-warm)', border: '1px solid var(--color-border)', color: 'var(--color-text-muted)' }}
             >

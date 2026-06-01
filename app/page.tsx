@@ -52,7 +52,7 @@ export default function HomePage() {
   }
 
   return (
-    <main className="min-h-screen flex flex-col" style={{ background: 'var(--color-bg)' }}>
+    <main id="main-content" className="min-h-screen flex flex-col" style={{ background: 'var(--color-bg)' }}>
 
       {/* Hero */}
       <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
@@ -142,14 +142,16 @@ export default function HomePage() {
               backdropFilter: 'blur(12px)',
             }}
           >
-            <p
-              className="text-base font-bold mb-3 text-right"
+            <label
+              htmlFor="delivery-date"
+              className="block text-base font-bold mb-3 text-right"
               style={{ color: 'var(--color-text)' }}
             >
               {savedCarts.length > 0 ? 'או הזמינו לתאריך חדש:' : 'לאיזה תאריך תרצו להזמין?'}
-            </p>
+            </label>
 
             <input
+              id="delivery-date"
               type="date"
               value={date}
               min={today}
@@ -272,10 +274,15 @@ export default function HomePage() {
 
       {/* Footer */}
       <footer
-        className="py-6 text-center text-sm"
+        className="py-6 text-center text-sm space-y-2"
         style={{ background: 'var(--color-text)', color: 'rgba(255,255,255,0.45)' }}
       >
-        אליתר © {new Date().getFullYear()} · אוכל ביתי
+        <p>אליתר © {new Date().getFullYear()} · אוכל ביתי</p>
+        <p className="flex items-center justify-center gap-4">
+          <a href="/accessibility" className="hover:text-white transition-colors underline">הצהרת נגישות</a>
+          <span>·</span>
+          <a href="/privacy" className="hover:text-white transition-colors underline">מדיניות פרטיות</a>
+        </p>
       </footer>
 
     </main>
