@@ -235,9 +235,16 @@ function OrderContent() {
                 </div>
 
                 <div className="p-4 space-y-3" style={{ borderTop: '1px solid var(--color-border)' }}>
+                  <div
+                    className="flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-sm font-bold"
+                    style={{ background: '#fef3c7', color: '#92400e' }}
+                  >
+                    <span>✨</span>
+                    <span>הזמנה ראשונה? מגיע לך 15% הנחה!</span>
+                  </div>
                   <div className="flex justify-between items-center">
                     <span className="text-lg font-black" style={{ color: 'var(--color-text)' }}>סה&quot;כ:</span>
-                    <span className="text-2xl font-black" style={{ color: 'var(--color-primary)' }}>{formatPrice(cartTotal)}</span>
+                    <span className="text-2xl font-black" style={{ color: 'var(--color-primary)' }}>{formatPrice(rawTotal)}</span>
                   </div>
                   <button
                     onClick={() => { setShowCart(false); setShowCheckout(true); }}
