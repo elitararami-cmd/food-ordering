@@ -31,10 +31,19 @@ export default function PrivacyPage() {
           <ul className="space-y-1 list-disc list-inside" style={{ color: 'var(--color-text-muted)' }}>
             <li>לצורך עיבוד וסיום ההזמנה</li>
             <li>ליצירת קשר בנוגע להזמנה</li>
-            <li>לבדיקת היסטוריית הזמנות לצורך הנחה לקוחות חוזרים</li>
+            <li>לבדיקת היסטוריית הזמנות לצורך הנחה ללקוחות חוזרים</li>
           </ul>
           <p style={{ color: 'var(--color-text-muted)' }}>
-            <strong>המידע לא ישמש לשיווק, לא יועבר לצד שלישי, ולא יימכר.</strong>
+            המידע לא ישמש לשיווק, לא יועבר לצד שלישי למטרות שיווק או רווח, ולא יימכר.
+            המידע מאוחסן בשרתי ענן המספקים לנו שירותי תשתית טכנולוגית המשמשים אך ורק לתפעול האתר וקליטת ההזמנות.
+          </p>
+        </section>
+
+        <section className="space-y-3">
+          <h2 className="text-xl font-bold" style={{ color: 'var(--color-text)' }}>אבטחת מידע</h2>
+          <p style={{ color: 'var(--color-text-muted)' }}>
+            אנו נוקטים באמצעים טכנולוגיים וארגוניים מקובלים כדי לאבטח את המידע הנשמר במערכותינו
+            ולמנוע גישה לא מורשית אליו. התקשורת באתר מוצפנת באמצעות פרוטוקול HTTPS.
           </p>
         </section>
 
@@ -49,14 +58,17 @@ export default function PrivacyPage() {
           <h2 className="text-xl font-bold" style={{ color: 'var(--color-text)' }}>הזכות לעיין ולמחוק מידע</h2>
           <p style={{ color: 'var(--color-text-muted)' }}>
             בהתאם לחוק הגנת הפרטיות, יש לכם זכות לעיין במידע שנשמר עליכם ולבקש את מחיקתו.
-            לבקשות כאלה, צרו איתנו קשר:
+            לבקשות כאלה, צרו איתנו קשר ישירות:
           </p>
           <div
-            className="rounded-xl p-4"
+            className="rounded-xl p-4 space-y-1"
             style={{ background: 'var(--color-warm)', border: '1px solid var(--color-border)' }}
           >
             <p className="font-bold" style={{ color: 'var(--color-text)' }}>אליתר — אוכל ביתי</p>
-            <p style={{ color: 'var(--color-text-muted)' }}>צרו קשר דרך האתר ונטפל בבקשתכם תוך 14 ימי עסקים.</p>
+            <p style={{ color: 'var(--color-text-muted)' }}>
+              טלפון: <a href="tel:PHONE_PLACEHOLDER" style={{ color: 'var(--color-primary)' }}>יש להוסיף מספר טלפון</a>
+            </p>
+            <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>זמן תגובה מרבי: 14 ימי עסקים</p>
           </div>
         </section>
 

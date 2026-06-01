@@ -278,10 +278,12 @@ export default function HomePage() {
         style={{ background: 'var(--color-text)', color: 'rgba(255,255,255,0.45)' }}
       >
         <p>אליתר © {new Date().getFullYear()} · אוכל ביתי</p>
-        <p className="flex items-center justify-center gap-4">
+        <p className="flex items-center justify-center gap-4 flex-wrap">
           <a href="/accessibility" className="hover:text-white transition-colors underline">הצהרת נגישות</a>
           <span>·</span>
           <a href="/privacy" className="hover:text-white transition-colors underline">מדיניות פרטיות</a>
+          <span>·</span>
+          <a href="/terms" className="hover:text-white transition-colors underline">תקנון ותנאי שימוש</a>
         </p>
       </footer>
 
