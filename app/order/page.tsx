@@ -30,6 +30,7 @@ function OrderContent() {
   const [form, setForm] = useState({ name: '', phone: '', notes: '' });
   const [submitting, setSubmitting] = useState(false);
   const [isFirstOrder, setIsFirstOrder] = useState<boolean | null>(null);
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
 
   useEffect(() => {
     if (!date) { router.push('/'); return; }
@@ -347,6 +348,22 @@ function OrderContent() {
               </div>
             </div>
 
+            <label className="flex items-start gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={agreedToTerms}
+                onChange={e => setAgreedToTerms(e.target.checked)}
+                className="mt-1 w-5 h-5 flex-shrink-0 cursor-pointer accent-[#8B2635]"
+              />
+              <span className="text-sm leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
+                קראתי ואני מסכים/ה ל
+                <a href="/terms" target="_blank" style={{ color: 'var(--color-primary)', fontWeight: 'bold' }}> תקנון האתר </a>
+                ול
+                <a href="/privacy" target="_blank" style={{ color: 'var(--color-primary)', fontWeight: 'bold' }}> מדיניות הפרטיות</a>
+                , לרבות תנאי הביטול ואזהרת האלרגיות.
+              </span>
+            </label>
+
             <div className="flex gap-2 pt-1">
               <button
                 onClick={() => setShowCheckout(false)}
@@ -357,7 +374,7 @@ function OrderContent() {
               </button>
               <button
                 onClick={handleOrder}
-                disabled={!form.name || !form.phone || submitting}
+                disabled={!form.name || !form.phone || !agreedToTerms || submitting}
                 className="flex-1 py-3 rounded-xl font-bold transition-all hover:opacity-90 disabled:opacity-40"
                 style={{ background: 'var(--color-primary)', color: '#fff' }}
               >
