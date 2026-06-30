@@ -28,6 +28,9 @@ export default function DashboardPage() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploadingFor, setUploadingFor] = useState<number | null>(null);
 
+  // Delete
+  const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null);
+
   // Lightbox
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
 
@@ -92,6 +95,12 @@ export default function DashboardPage() {
     setForm({ name: product.name, description: product.description || '', price: product.price.toString(), unit: product.unit });
     setShowForm(true);
     setTimeout(() => editFormRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+  }
+
+  async function handleDeleteProduct(id: number) {
+    await fetch(`/api/products/${id}`, { method: 'DELETE' });
+    setConfirmDeleteId(null);
+    fetchProducts();
   }
 
   async function handleImageUpload(productId: number, file: File) {
@@ -281,6 +290,30 @@ export default function DashboardPage() {
                             }}
                           />
                         </label>
+                        {confirmDeleteId === p.id ? (
+                          <div className="flex flex-col gap-1">
+                            <span className="text-xs text-center text-red-700 font-bold">בטוח?</span>
+                            <button
+                              onClick={() => handleDeleteProduct(p.id)}
+                              className="text-xs bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-lg transition-colors font-bold"
+                            >
+                              כן, מחק
+                            </button>
+                            <button
+                              onClick={() => setConfirmDeleteId(null)}
+                              className="text-xs bg-gray-100 hover:bg-gray-200 text-gray-600 px-3 py-1.5 rounded-lg transition-colors"
+                            >
+                              ביטול
+                            </button>
+                          </div>
+                        ) : (
+                          <button
+                            onClick={() => setConfirmDeleteId(p.id)}
+                            className="text-xs bg-red-50 hover:bg-red-100 text-red-600 px-3 py-1.5 rounded-lg transition-colors"
+                          >
+                            🗑 מחיקה
+                          </button>
+                        )}
                       </div>
                     </div>
 

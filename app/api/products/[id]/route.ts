@@ -25,6 +25,6 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
 
   const { id } = await params;
   const db = getDb();
-  db.prepare('UPDATE products SET active = 0 WHERE id = ?').run(id);
+  db.prepare('DELETE FROM products WHERE id = ?').run(id);
   return NextResponse.json({ ok: true });
 }
