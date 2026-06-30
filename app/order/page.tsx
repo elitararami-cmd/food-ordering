@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useCallback, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import Image from 'next/image';
 import type { Product, CartItem } from '@/lib/types';
 
 const WEIGHT_STEPS = [0.25, 0.5, 0.75, 1, 1.5, 2, 3, 5];
@@ -436,7 +435,8 @@ function ProductCard({ product, cartItem, onAdd, onRemove }: {
         onClick={() => product.image_path && setLightbox(true)}
       >
         {product.image_path ? (
-          <Image src={product.image_path} alt={product.name} fill className="object-cover hover:scale-105 transition-transform duration-300" />
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={product.image_path} alt={product.name} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-5xl opacity-30">🍲</div>
         )}

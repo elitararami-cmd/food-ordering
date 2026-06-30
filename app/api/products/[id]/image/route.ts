@@ -19,14 +19,14 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
 
   const ext = file.name.split('.').pop();
   const filename = `product_${id}_${Date.now()}.${ext}`;
-  const uploadDir = path.join(process.cwd(), 'public', 'products');
+  const uploadDir = path.join(process.cwd(), 'data', 'uploads');
 
   await mkdir(uploadDir, { recursive: true });
 
   const bytes = await file.arrayBuffer();
   await writeFile(path.join(uploadDir, filename), Buffer.from(bytes));
 
-  const imagePath = `/products/${filename}`;
+  const imagePath = `/api/uploads/${filename}`;
   const db = getDb();
   db.prepare('UPDATE products SET image_path = ? WHERE id = ?').run(imagePath, id);
 

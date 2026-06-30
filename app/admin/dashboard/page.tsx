@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
 import type { Product, Order } from '@/lib/types';
 
 type Tab = 'products' | 'orders';
@@ -233,7 +232,8 @@ export default function DashboardPage() {
                         onClick={() => p.image_path && setLightboxSrc(p.image_path)}
                       >
                         {p.image_path ? (
-                          <Image src={p.image_path} alt={p.name} fill className="object-cover hover:scale-105 transition-transform duration-200" />
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img src={p.image_path} alt={p.name} className="w-full h-full object-cover hover:scale-105 transition-transform duration-200" />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center text-2xl">🍱</div>
                         )}
